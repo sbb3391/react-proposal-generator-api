@@ -80,7 +80,6 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
   database: react_proposal_generator_api_production
   adapter: postgresql
   encoding: unicode

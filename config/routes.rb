@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
 
-  root to: "items_assemblies#index"
+  resources :images
+  resources :customers do 
+    resources :proposals
+  end
+  resources :proposals do 
+    resources :machines 
+  end
+  
+  root "items_assemblies#index"
   resources :machine_assembly_items
   resources :pick_one_groups
   resources :parts
   resources :machines
+  post '/machines/preview', to: 'machines#preview'
   resources :model_assemblies
   resources :items_assemblies
   resources :assemblies do 

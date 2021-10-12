@@ -25,6 +25,8 @@ gem 'csv'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'active_model_serializers'
+gem 'pry'
+gem 'seed_dump'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -57,3 +59,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "rack-cors", "~> 1.1"
+gem "faker", "~> 2.19"

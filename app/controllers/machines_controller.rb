@@ -33,7 +33,6 @@ class MachinesController < ApplicationController
   end
 
   def update
-    byebug
     params[:assemblies].each do |assembly| 
       assembly[:items].each do |item|
         assembly_item_id =  ItemsAssembly.find_by(item_id: item[:itemId], assembly_id: item[:assemblyId]).id

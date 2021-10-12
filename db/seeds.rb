@@ -1,8 +1,8 @@
-require 'faker'
+# require 'faker'
 
-20.times do 
-  Customer.create(customer_name: Faker::Company.name)
-end
+# 20.times do 
+#   Customer.create(customer_name: Faker::Company.name)
+# end
 
 
 # PickOneGroup.create!([

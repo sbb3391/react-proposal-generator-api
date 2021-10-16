@@ -10,4 +10,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins 'http://localhost:3001'
     resource '*', headers: :any, methods: [:get, :post, :patch, :put]
   end
+
+  allow do
+    origins 'https://proposals-api.herokuapp.com'
+    resource '*', headers: :any, methods: [:get, :post, :patch, :put]
+  end
 end

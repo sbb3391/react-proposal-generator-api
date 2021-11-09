@@ -10,9 +10,14 @@ class MachinesController < ApplicationController
   end 
   
   def create
-    proposal = Proposal.find(params[:proposal_id])
     
-    machine = Machine.create(model_id: params[:model][:id], proposal_id: proposal.id, customer_id: proposal ? Customer.find(proposal.customer_id).id : nil)
+    if params[:proposal_id]
+      proposal = Proposal.find(params[:proposal_id])
+      machine = Machine.create(model_id: params[:model][:id], proposal_id: proposal.id, customer_id: proposal ? Customer.find(proposal.customer_id).id : nil)
+    else
+      proposal = Proposal.create(name: params[:model][:proposal_name], customer_id: params[:model][:customer_id])
+      machine = Machine.create(model_id: params[:model][:id], proposal_id: proposal.id, customer_id: proposal ? Customer.find(proposal.customer_id).id : nil)
+    end
 
     image_items = []
 

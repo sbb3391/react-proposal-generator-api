@@ -6,9 +6,9 @@ end
 
 
 PickOneGroup.create!([
-  {model_id: 4, description: "Pick paper deck for C12000/C14000"},
-  {model_id: 4, description: "Pick one output assembly for C12000/C14000"},
-  {model_id: 4, description: "Pick a print controller for the C12000/C14000"}
+  {model_id: 1, description: "Pick paper deck for C12000/C14000"},
+  {model_id: 1, description: "Pick one output assembly for C12000/C14000"},
+  {model_id: 1, description: "Pick a print controller for the C12000/C14000"}
 ])
 
 ModelAssembly.create!([
@@ -26,7 +26,7 @@ ModelAssembly.create!([
   {model_id: 1, assembly_id: 32, required: nil, pick_one_group_id: nil},
   {model_id: 1, assembly_id: 38, required: nil, pick_one_group_id: nil},
   {model_id: 1, assembly_id: 39, required: nil, pick_one_group_id: nil},
-  {model_id: 2, assembly_id: 12, required: nil, pick_one_group_id: nil},
+  {model_id: 1, assembly_id: 12, required: nil, pick_one_group_id: nil},
   {model_id: 1, assembly_id: 2, required: true, pick_one_group_id: nil},
   {model_id: 1, assembly_id: 42, required: true, pick_one_group_id: nil},
   {model_id: 1, assembly_id: 43, required: false, pick_one_group_id: nil},
@@ -45,12 +45,13 @@ ModelAssembly.create!([
   {model_id: 1, assembly_id: 36, required: nil, pick_one_group_id: 3},
   {model_id: 1, assembly_id: 19, required: true, pick_one_group_id: nil}
 ])
+
 Model.create!([
-  {name: "c12000", short_description: "new Cypress model for high speed production"},
+  {name: "c12000", short_description: "120 page per minute Cypress model"},
   {name: "c14000", short_description: "140 page per minute Cypress model"}
 ])
 
-ia = [
+ItemsAssembly.create!([
   {item_id: 3, assembly_id: 42, required: true},
   {item_id: 4, assembly_id: 42, required: true},
   {item_id: 132, assembly_id: 47, required: true},
@@ -237,7 +238,8 @@ ia = [
   {item_id: 96, assembly_id: 31, required: false},
   {item_id: 97, assembly_id: 31, required: false},
   {item_id: 134, assembly_id: 31, required: false}
-]P
+])
+
 
 Assembly.create!([
   {name: "BASIC NETWORK SERVICE - BNS08", assembly_number: "7640018098", assembly_type: nil},
@@ -274,7 +276,6 @@ Assembly.create!([
   {name: "IC-318 FIERY IMAGE CONTROLLER", assembly_number: "ACAYWY1", assembly_type: "controller"},
   {name: "IC-319 FIERY PREMIUM IMAGE CONTROLLER", assembly_number: "ACVAWY1", assembly_type: "controller"},
   {name: "IC-316 CREO CONTROLLER", assembly_number: "ACN1WY1", assembly_type: "controller"},
-  {name: "ACCURIOPRESS C12000", assembly_number: nil, assembly_type: "engine"},
   {name: "OT-512 OUTPUT TRAY", assembly_number: "AC8WWY1", assembly_type: "paper output"},
   {name: "DELIVERY & INSTALL", assembly_number: nil, assembly_type: "main unit"},
   {name: "LEASE RETURNS", assembly_number: nil, assembly_type: "main unit"},

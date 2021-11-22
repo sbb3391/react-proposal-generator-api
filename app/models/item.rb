@@ -18,5 +18,11 @@ class Item < ApplicationRecord
     hashed.each do |row|
       self.create(row)
     end
-  end  
+  end
+  
+  def self.add_image_to_items
+    Item.all.each do |item|
+      binding.pry
+    end
+  end
 end

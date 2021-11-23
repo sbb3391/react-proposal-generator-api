@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_10_221214) do
+ActiveRecord::Schema.define(version: 2021_11_23_154600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,8 +58,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_221214) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string "base64_image"
-    t.string "item_ids", default: [], array: true
+    t.string "image_items"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -111,9 +110,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_221214) do
     t.integer "annual_color_volume"
     t.integer "annual_mono_volume"
     t.bigint "customer_id"
-    t.bigint "image_id"
     t.index ["customer_id"], name: "index_machines_on_customer_id"
-    t.index ["image_id"], name: "index_machines_on_image_id"
     t.index ["model_id"], name: "index_machines_on_model_id"
     t.index ["proposal_id"], name: "index_machines_on_proposal_id"
   end
@@ -168,7 +165,6 @@ ActiveRecord::Schema.define(version: 2021_09_10_221214) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "machines", "customers"
-  add_foreign_key "machines", "images"
   add_foreign_key "machines", "proposals"
   add_foreign_key "model_assemblies", "pick_one_groups"
   add_foreign_key "proposals", "customers"

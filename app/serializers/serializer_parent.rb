@@ -1,3 +1,5 @@
+require "awesome_print"
+
 class SerializerParent < ActiveModel::Serializer
 
   def serialize_machine_assemblies(machine)
@@ -55,7 +57,7 @@ class SerializerParent < ActiveModel::Serializer
   end
 
   def serialize_machine(machine)
-    {
+    serialized_machine = {
       machineId: machine.id,
       modelId: machine.model_id,
       proposalId: machine.proposal_id,
@@ -66,9 +68,26 @@ class SerializerParent < ActiveModel::Serializer
       annualMonoVolume: machine.annual_mono_volume,
       serviceComments: machine.service_comments,
       pricingComments: machine.pricing_comments,
-      sellingPrice: calculate_selling_price(machine),
-      image: Image.find_by(id: machine.image_id)
+      sellingPrice: calculate_selling_price(machine)
     }
+
+    def return_image(machine)  
+      image_items = []
+
+      machine[:assemblies].each do |a|
+        a[:items].each do |i|
+          image_items.push(i[:itemId]) if i[:image]
+        end
+      end
+
+      image_key = image_items.sort.join("-")
+
+      byebug
+    end
+
+    return_image(serialized_machine)
+
+    serialized_machine
   end
 
   def pick_one_group(model_id, assembly_id)
@@ -114,7 +133,8 @@ class SerializerParent < ActiveModel::Serializer
           branchFloor: item.branch_floor_price,
           target: item.target_price,
           required: item.items_assemblies[0].required,
-          part_type: item.part_type
+          part_type: item.part_type,
+          image: item.image
         }
       end
 

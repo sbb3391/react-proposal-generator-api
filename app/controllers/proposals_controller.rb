@@ -13,7 +13,6 @@ class ProposalsController < ApplicationController
   end
 
   def create
-    byebug
     proposal = Proposal.create(name: params[:proposal_name], customer_id: params[:customer_id])
 
     render json: proposal

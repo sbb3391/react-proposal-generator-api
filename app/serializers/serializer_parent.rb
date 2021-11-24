@@ -55,8 +55,19 @@ class SerializerParent < ActiveModel::Serializer
 
     items_prices.reduce(0, :+)
   end
-
+  
   def serialize_machine(machine)
+    def return_image_key(machine)  
+      image_items = []
+  
+      machine[:assemblies].each do |a|
+        a[:items].each do |i|
+          image_items.push(i[:itemId]) if i[:image]
+        end
+      end
+      image_key = image_items.sort.join("-")
+    end
+
     serialized_machine = {
       machineId: machine.id,
       modelId: machine.model_id,
@@ -68,25 +79,10 @@ class SerializerParent < ActiveModel::Serializer
       annualMonoVolume: machine.annual_mono_volume,
       serviceComments: machine.service_comments,
       pricingComments: machine.pricing_comments,
-      sellingPrice: calculate_selling_price(machine)
+      sellingPrice: calculate_selling_price(machine),
     }
 
-    def return_image(machine)  
-      image_items = []
-
-      machine[:assemblies].each do |a|
-        a[:items].each do |i|
-          image_items.push(i[:itemId]) if i[:image]
-        end
-      end
-
-      image_key = image_items.sort.join("-")
-
-      byebug
-    end
-
-    return_image(serialized_machine)
-
+    serialized_machine[:image_url] = Image.find_by(image_key: return_image_key(serialized_machine)).image_url
     serialized_machine
   end
 

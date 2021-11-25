@@ -82,7 +82,9 @@ class SerializerParent < ActiveModel::Serializer
       sellingPrice: calculate_selling_price(machine),
     }
 
-    serialized_machine[:image_url] = Image.find_by(image_key: return_image_key(serialized_machine)).image_url
+    image = Image.find_by(image_key: return_image_key(serialized_machine))
+    image ? serialized_machine[:image_url] = image.image_url : serialized_machine[:image_url] = nil 
+    serialized_machine[:image_key] = return_image_key(serialized_machine)
     serialized_machine
   end
 

@@ -80,6 +80,7 @@ class SerializerParent < ActiveModel::Serializer
       serviceComments: machine.service_comments,
       pricingComments: machine.pricing_comments,
       sellingPrice: calculate_selling_price(machine),
+      customer: Customer.find(machine.customer_id).customer_name 
     }
 
     image = Image.find_by(image_key: return_image_key(serialized_machine))

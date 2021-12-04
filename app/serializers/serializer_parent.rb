@@ -57,17 +57,6 @@ class SerializerParent < ActiveModel::Serializer
   end
   
   def serialize_machine(machine)
-    def return_image_key(machine)  
-      image_items = []
-  
-      machine[:assemblies].each do |a|
-        a[:items].each do |i|
-          image_items.push(i[:itemId]) if i[:image]
-        end
-      end
-      image_key = image_items.sort.join("-")
-    end
-
     serialized_machine = {
       machineId: machine.id,
       modelId: machine.model_id,
@@ -149,6 +138,19 @@ class SerializerParent < ActiveModel::Serializer
     end 
 
     assemblies_map
+  end
+
+  public
+
+  def return_image_key(machine)  
+    image_items = []
+
+    machine[:assemblies].each do |a|
+      a[:items].each do |i|
+        image_items.push(i[:itemId]) if i[:image]
+      end
+    end
+    image_key = image_items.sort.join("-")
   end
 
 end

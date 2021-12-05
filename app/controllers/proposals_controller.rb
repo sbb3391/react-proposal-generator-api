@@ -12,6 +12,13 @@ class ProposalsController < ApplicationController
     render json: proposal
   end
 
+  def destroy
+    proposal = Proposal.find(params[:id])
+    proposal.destroy
+
+    render json: proposal
+  end
+
   def create
     proposal = Proposal.create(name: params[:proposal_name], customer_id: params[:customer_id])
 

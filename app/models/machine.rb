@@ -3,5 +3,7 @@ class Machine < ApplicationRecord
   belongs_to :proposal
   belongs_to :model
   has_many :parts
-  has_many :machine_assembly_items
+  has_many :machine_assembly_items, dependent: :destroy
 end
+
+

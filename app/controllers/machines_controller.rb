@@ -8,6 +8,13 @@ class MachinesController < ApplicationController
 
   def index
   end 
+
+  def destroy
+    machine = Machine.find(params[:id])
+    machine.destroy
+
+    render json: machine
+  end
   
   def create
     

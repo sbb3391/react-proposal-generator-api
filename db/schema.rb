@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_153817) do
+ActiveRecord::Schema.define(version: 2021_12_21_031318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,19 @@ ActiveRecord::Schema.define(version: 2021_11_24_153817) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "customer_id"
     t.index ["customer_id"], name: "index_proposals_on_customer_id"
+  end
+
+  create_table "supply_orders", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.integer "order_number"
+    t.date "date_entered"
+    t.date "due_date"
+    t.date "date_escalated"
+    t.date "completed_date"
+    t.boolean "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_supply_orders_on_customer_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

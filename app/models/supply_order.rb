@@ -1,0 +1,2 @@
+class SupplyOrder < ApplicationRecord
+end
